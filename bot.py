@@ -10,19 +10,20 @@ from telegram.ext import (
 )
 from telegram.constants import ChatMemberStatus # لاستخدام حالة العضوية
 
-# === إعدادات البوت ===
-# ⚠️ استبدل التوكن بالتوكن الجديد الخاص بك
-BOT_TOKEN = "8578684413:AAGy_qXKox1BQMci5xfw9GOc-AXa_VT6nZo"
-ADMIN_ID = 7044930530  # الآيدي الخاص بك
+# === إعدادات البوت والقناة والإيميل (القراءة من متغيرات البيئة) ===
+# ⚠️ يجب إدخال هذه القيم في قسم 'المتغيرات البيئية' على Render ليعمل البوت
+BOT_TOKEN = os.environ.get("BOT_TOKEN") 
+# نستخدم قيمة افتراضية للآيدي إذا لم يتم العثور عليه في البيئة
+ADMIN_ID = int(os.environ.get("ADMIN_ID")) if os.environ.get("ADMIN_ID") else 7044930530 
 
-# === إعدادات القناة (الجديدة) ===
-# ضع معرف القناة (مع @) التي يجب على المستخدم الاشتراك فيها
-# مثال: @ssdionlain 
+# === إعدادات القناة (القيمة يمكن أن تبقى ثابتة في الكود) ===
 CHANNEL_USERNAME = "@ssdionlain" 
 
-# === إعدادات الإيميل ===
-SENDER_EMAIL = "ngmtm2024@gmail.com"
-EMAIL_PASSWORD = "kydr nsms vsib ugku" 
+# === إعدادات الإيميل (القراءة من متغيرات البيئة) ===
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD") 
+
+# ==========================================================
 
 FILES = {}  # اسم الملف → {path, type, file_id}
 USERS_FILE = "users.json"
